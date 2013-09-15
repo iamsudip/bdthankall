@@ -1,6 +1,5 @@
 import fbconsole
 import urllib
-from requests import get
  
 fbconsole.AUTH_SCOPE = ['publish_actions', 'read_stream','user_actions.news', 'publish_stream']
 fbconsole.authenticate()
