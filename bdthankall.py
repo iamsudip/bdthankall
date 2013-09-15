@@ -1,21 +1,35 @@
+#!/usr/bin/env python
+
 import fbconsole
-import requests 
-import sys
- 
-def main(mez):
- fbconsole.AUTH_SCOPE = ['publish_actions', 'read_stream','user_actions.news', 'publish_stream']
- fbconsole.authenticate()
+import requests
 
- s = fbconsole.fql("SELECT post_id FROM stream WHERE source_id=me() LIMIT 3")
- for i in s:
 
-    f = requests.post("https://graph.facebook.com/" + str(i['post_id']) + "/comments/? access_token="+fbconsole.ACCESS_TOKEN+"&message=%s" %mez)
-    f = requests.post("https://graph.facebook.com/" + str(i['post_id']) + "/likes/?   access_token="+fbconsole.ACCESS_TOKEN+"&method=POST")
+def bdaythank(post_limit, comment=None):
+    ''' Likes and comments all posts automatically
+    '''
+
+    fbconsole.AUTH_SCOPE = ['publish_actions', 'read_stream',
+                            'user_actions.news', 'publish_stream'
+                           ]
+
+    fbconsole.authenticate()
+
+    query = fbconsole.fql("SELECT post_id FROM stream WHERE source_id=me() LIMIT %s" % post_limit)
+
+    for post in query:
+        if comment:
+            comment_id = requests.post("https://graph.facebook.com/" + str(post['post_id'])
+                                   + "/comments/?access_token=" + fbconsole.ACCESS_TOKEN 
+                                   + "&message=%s" % comment
+                                  )
+            print "Comment id: " + comment_id.text
+
+        requests.post("https://graph.facebook.com/" + str(post['post_id'])
+                      + "/likes/?access_token=" + fbconsole.ACCESS_TOKEN + "&method=POST"
+                     )
 
 
 if __name__=='__main__':
- if len(sys.argv)< 2: 
-    print "please give a birthday message" 
- else:
-    main(sys.argv[1])
-    
+    limit = raw_input("How many post I have to like? ")
+    comment = raw_input("Any message to your friends? ")
+    bdaythank(limit, comment)
