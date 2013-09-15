@@ -27,9 +27,11 @@ def bdaythank(post_limit, comment=None):
         requests.post("https://graph.facebook.com/" + str(post['post_id'])
                       + "/likes/?access_token=" + fbconsole.ACCESS_TOKEN + "&method=POST"
                      )
+        print "$ Liked"
 
 
 if __name__=='__main__':
     limit = raw_input("How many post I have to like? ")
     comment = raw_input("Any message to your friends? ")
     bdaythank(limit, comment)
+    print "All done!"
