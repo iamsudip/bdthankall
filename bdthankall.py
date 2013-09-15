@@ -1,13 +1,21 @@
 import fbconsole
-import urllib
+import requests 
+import sys
  
-fbconsole.AUTH_SCOPE = ['publish_actions', 'read_stream','user_actions.news', 'publish_stream']
-fbconsole.authenticate()
+def main(mez):
+ fbconsole.AUTH_SCOPE = ['publish_actions', 'read_stream','user_actions.news', 'publish_stream']
+ fbconsole.authenticate()
 
-s = fbconsole.fql("SELECT post_id FROM stream WHERE source_id=me() LIMIT 100")
-print fbconsole.ACCESS_TOKEN
+ s = fbconsole.fql("SELECT post_id FROM stream WHERE source_id=me() LIMIT 3")
+ for i in s:
 
-for i in s:
-    print str(i['post_id'])
-    f = urllib.urlopen("https://graph.facebook.com/" + str(i['post_id']) + "/comments/?access_token="+fbconsole.ACCESS_TOKEN+"&message=Thank%20you&method=POST")
-    print f.read()
+    f = requests.post("https://graph.facebook.com/" + str(i['post_id']) + "/comments/? access_token="+fbconsole.ACCESS_TOKEN+"&message=%s" %mez)
+    f = requests.post("https://graph.facebook.com/" + str(i['post_id']) + "/likes/?   access_token="+fbconsole.ACCESS_TOKEN+"&method=POST")
+
+
+if __name__=='__main__':
+ if len(sys.argv)< 2: 
+    print "please give a birthday message" 
+ else:
+    main(sys.argv[1])
+    
