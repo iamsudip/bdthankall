@@ -16,6 +16,7 @@ def bdaythank(post_limit, comment=None):
 
     query = fbconsole.fql("SELECT post_id FROM stream WHERE source_id=me() LIMIT %s" % post_limit)
 
+
     for post in query:
         if comment:
             comment_id = requests.post("https://graph.facebook.com/" + str(post['post_id'])
@@ -28,6 +29,8 @@ def bdaythank(post_limit, comment=None):
                       + "/likes/?access_token=" + fbconsole.ACCESS_TOKEN + "&method=POST"
                      )
         print "$ Liked"
+
+    fbconsole.logout()
 
 
 if __name__=='__main__':
