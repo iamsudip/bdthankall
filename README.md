@@ -1,6 +1,6 @@
-==========
-bdthankall
-==========
+=============
+bdthankall.py
+=============
 
 On facebook we have thousands of friend. On your birthday they wish you on your wall then you see thousands of wall post waiting for your reply.
 
@@ -25,6 +25,10 @@ Here is one execution on my computer ::
       localhost - - [16/Sep/2013 12:50:51] "GET /favicon.ico HTTP/1.1" 200 -
       localhost - - [16/Sep/2013 12:50:51] "GET /?
       access_token=***********************************&expires_in=5949 HTTP/1.1" 200 -
+      Comment id: *********
+      $ Liked
+      Comment id: *********
+      $ Liked
       All done!
 
 **I should mention one thing when you run the code, your default browser window may be open for your permission or it can ask for your facebook credential, just grant all that it can access your profile. :)**
