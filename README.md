@@ -31,4 +31,4 @@ Here is one execution on my computer ::
       $ Liked
       All done!
 
-**I should mention one thing when you run the code, your default browser window may be open for your permission or it can ask for your facebook credential, just grant all that it can access your profile. :)**
+**I should mention one thing when you run the code, your default browser window may be open for your permission or it can ask for your facebook credential, just grant all then it can access your profile. :)**
