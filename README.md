@@ -10,6 +10,11 @@ By the way, it is not that you only can use it on your birthday, actually it com
 
 So if you execute it on the right time.
 
+Requirements
+------------
+
+    $ sudo pip install fbconsole
+
 
 How to use?
 -----------
